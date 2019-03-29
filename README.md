@@ -16,7 +16,3 @@ This Project is built with the [Laravel WebSockets](https://github.com/beyondcod
 If you want to change js or vue files, you should write
 1. `npm install`
 2. `npm run watch` and leave it running while develpment
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
