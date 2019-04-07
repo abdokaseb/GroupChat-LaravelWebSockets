@@ -14095,16 +14095,6 @@ var app = new Vue({
             _this.users = _this.users.filter(function (u) {
                 return u.id !== user.id;
             });
-        }).listenForWhisper('typing', function (_ref) {
-            var id = _ref.id,
-                name = _ref.name;
-
-            _this.users.forEach(function (user, index) {
-                if (user.id === id) {
-                    user.typing = true;
-                    _this.$set(_this.users, index, user);
-                }
-            });
         }).listen('MessageSent', function (event) {
             _this.messages.push({
                 message: event.message.message,
