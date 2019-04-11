@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab5773e3c4a1536b7e07ee09e52d3d9c",
+    "content-hash": "ee453ee1e33271616e31adad9bd57248",
     "packages": [
         {
             "name": "beyondcode/laravel-websockets",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:beyondcode/laravel-websockets.git",
+                "url": "https://github.com/beyondcode/laravel-websockets.git",
                 "reference": "cc8f8a8168104e2675b9fefde5f718a63958d2c4"
             },
             "dist": {
@@ -767,6 +767,73 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "laravel-whisper/whisper",
+            "version": "v0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-whisper/framework.git",
+                "reference": "a0295f1f163d8ac4dfc5550ca06409673bb8815b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-whisper/framework/zipball/a0295f1f163d8ac4dfc5550ca06409673bb8815b",
+                "reference": "a0295f1f163d8ac4dfc5550ca06409673bb8815b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/contracts": "5.5.*|5.6.*|5.7.*",
+                "illuminate/database": "5.5.*|5.6.*|5.7.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*",
+                "nesbot/carbon": "^1.22",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.9",
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelWhisper\\Whisper\\WhisperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelWhisper\\Whisper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miguel Piedrafita",
+                    "email": "soy@miguelpiedrafita.com",
+                    "homepage": "https://miguelpiedrafita.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sergio Ródenas",
+                    "email": "serrogo@tedium.es",
+                    "homepage": "http://www.rodenastyle.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Work with external APIs using the Eloquent ORM models.",
+            "homepage": "https://github.com/laravel-whisper/whisper",
+            "keywords": [
+                "api",
+                "eloquent",
+                "laravel",
+                "whisper"
+            ],
+            "time": "2018-09-03T16:13:15+00:00"
         },
         {
             "name": "laravel/framework",

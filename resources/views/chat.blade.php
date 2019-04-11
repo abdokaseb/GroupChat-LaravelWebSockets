@@ -8,7 +8,7 @@
                 <div class="card card-default">
                     <div class="card-header">Chats</div>
 
-                    <div class="card-body">
+                    <div class="card-body" v-chat-scroll="{always: false, smooth: true}">
                         <chat-messages :messages="messages"></chat-messages>
                     </div>
                     <div class="card-footer">
