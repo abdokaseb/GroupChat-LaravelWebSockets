@@ -35,11 +35,21 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, Message $message)
+
+     /**
+     * Room  Details 
+     *
+     * @var \Room
+     */
+    public $room;
+
+    public function __construct(User $user, Message $message,String $room)
     {
         $this->user = $user;
 
         $this->message = $message;
+
+        $this->room = $room;
     }
 
     /**
@@ -48,7 +58,7 @@ class MessageSent implements ShouldBroadcast
      * @return Channel|array
      */
     public function broadcastOn()
-    {
-        return new PresenceChannel('chat');
+    {   
+        return new PresenceChannel($this->room);
     }
 }

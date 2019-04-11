@@ -13,9 +13,24 @@ class ChatsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function newRoom(Request $request){
+        $room = $request->room;
+        echo $room;
+        Broadcast::channel($room, function ($user) {
+            return $user;
+        });
+
+        return ['status' => 'Message Sent!'];
+    }
+
+    public function index(Request $request)
     {
-        return view('chat');
+        $room = $request->room;
+        if ($room == NULL){
+            $room = 'chat';
+        }
+        echo $room;
+        return view('chat')->with(['room'=>$room]);
     }
 
     public function fetchMessages()
@@ -28,8 +43,10 @@ class ChatsController extends Controller
         $message = auth()->user()->messages()->create([
             'message' => $request->message
         ]);
-
-		broadcast(new MessageSent(auth()->user(), $message))->toOthers();
+        $room = $request->room;
+        // String $room = ;
+        // console.log("i'm here");
+		broadcast(new MessageSent(auth()->user(), $message,$room))->toOthers();
 
         return ['status' => 'Message Sent!'];
     }

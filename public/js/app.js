@@ -14073,7 +14073,6 @@ files.keys().map(function (key) {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 var app = new Vue({
     el: '#app',
 
@@ -14087,7 +14086,7 @@ var app = new Vue({
 
         this.fetchMessages();
 
-        Echo.join('chat').here(function (users) {
+        Echo.join(roomlayout).here(function (users) {
             _this.users = users;
         }).joining(function (user) {
             _this.users.push(user);
@@ -14103,11 +14102,14 @@ var app = new Vue({
 
             _this.users.forEach(function (user, index) {
                 if (user.id === event.user.id) {
-                    user.typing = false;
                     _this.$set(_this.users, index, user);
                 }
             });
         });
+        // .listenForWhisper("typing",response =>{
+        //     console.log("aykalam");
+        //     console.log(response);
+        // });
     },
 
 
@@ -59127,7 +59129,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'room'],
 
     data: function data() {
         return {
@@ -59140,8 +59142,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                room: this.room
             });
+            console.log(this.user);
+            console.log(this.room);
+            console.log(this);
 
             this.newMessage = '';
         }

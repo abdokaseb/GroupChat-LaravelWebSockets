@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        props: ['user'],
+        props: ['user','room'],
 
         data() {
             return {
@@ -31,11 +31,15 @@
             sendMessage() {
                 this.$emit('messagesent', {
                     user: this.user,
-                    message: this.newMessage
+                    message: this.newMessage,
+                    room: this.room
                 });
+                console.log(this.user);
+                console.log(this.room);
+                console.log(this);
 
                 this.newMessage = ''
-            }
+            },
         }
     }
 </script>

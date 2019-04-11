@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-default">
-                    <div class="card-header">Chats</div>
+                    <div class="card-header">{{$room}}</div>
 
                     <div class="card-body">
                         <chat-messages :messages="messages"></chat-messages>
@@ -14,6 +14,7 @@
                     <div class="card-footer">
                         <chat-form
                                 @messagesent="addMessage"
+                                room="{{$room}}"
                                 :user="{{ auth()->user() }}"
                         ></chat-form>
                     </div>

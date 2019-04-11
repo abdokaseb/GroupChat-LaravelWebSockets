@@ -25,10 +25,9 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 const app = new Vue({
     el: '#app',
-
+    
     data: {
         messages: [],
         users: [],
@@ -37,7 +36,7 @@ const app = new Vue({
     created() {
         this.fetchMessages();
 
-        Echo.join('chat')
+        Echo.join(roomlayout)
             .here(users => {
                 this.users = users;
             })
@@ -59,6 +58,10 @@ const app = new Vue({
                     }
                 });
             });
+            // .listenForWhisper("typing",response =>{
+            //     console.log("aykalam");
+            //     console.log(response);
+            // });
     },
 
     methods: {
