@@ -8,6 +8,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -77,7 +80,6 @@ const app = new Vue({
 
         addMessage(message) {
             this.messages.push(message);
-
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
