@@ -32,14 +32,16 @@
             }
         },
     created() {
-        Echo.join('chat')
-            .listenForWhisper("typing",Typing =>{
-                this.userTyping = Typing;
-                if(this.timer){clearTimeout(this.timer)};
-                this.timer = setTimeout(() => {
-                    this.userTyping = false;
-                }, 1000);
-            });
+         Echo.join('chat')
+             .listenForWhisper("typing",typingData =>{
+                 if (typingData.room == roomlayout){
+                     this.userTyping = true;
+                     if(this.timer){clearTimeout(this.timer)};
+                     this.timer = setTimeout(() => {
+                         this.userTyping = false;
+                     }, 1000);
+                 }
+             });
     },
         methods: {
             sendMessage() {
@@ -51,7 +53,9 @@
                 this.newMessage = ''
             },
             sendTyping(){
-               Echo.join('chat').whisper("typing",true)
+               Echo.join('chat').whisper("typing",{
+                   room: this.room
+               })
             }
           
         }
