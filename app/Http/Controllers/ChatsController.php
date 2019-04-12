@@ -27,9 +27,8 @@ class ChatsController extends Controller
     {
         $room = $request->room;
         if ($room == NULL){
-            $room = 'chat';
+            $room = 'general';
         }
-        echo $room;
         return view('chat')->with(['room'=>$room]);
     }
 
@@ -40,13 +39,12 @@ class ChatsController extends Controller
 
     public function sendMessage(Request $request)
     {
-        $message = auth()->user()->messages()->create([
-            'message' => $request->message
-        ]);
         $room = $request->room;
-        // String $room = ;
-        // console.log("i'm here");
-		broadcast(new MessageSent(auth()->user(), $message,$room))->toOthers();
+        $message = auth()->user()->messages()->create([
+            'message' => $request->message,
+            'roomChannel' => $room
+        ]);
+		broadcast(new MessageSent(auth()->user(), $message))->toOthers();
 
         return ['status' => 'Message Sent!'];
     }

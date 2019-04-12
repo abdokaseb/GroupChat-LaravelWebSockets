@@ -15,6 +15,6 @@ Broadcast::channel('chat', function ($user) {
 	return $user;
 });
 
-Broadcast::channel('chat2', function ($user) {
-	return $user;
-});
+// Broadcast::channel('chat2', function ($user) {
+// 	return $user;
+// });

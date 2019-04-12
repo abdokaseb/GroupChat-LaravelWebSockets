@@ -34,9 +34,6 @@
                     message: this.newMessage,
                     room: this.room
                 });
-                console.log(this.user);
-                console.log(this.room);
-                console.log(this);
 
                 this.newMessage = ''
             },

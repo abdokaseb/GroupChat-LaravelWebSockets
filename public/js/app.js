@@ -14086,7 +14086,7 @@ var app = new Vue({
 
         this.fetchMessages();
 
-        Echo.join(roomlayout).here(function (users) {
+        Echo.join('chat').here(function (users) {
             _this.users = users;
         }).joining(function (user) {
             _this.users.push(user);
@@ -14095,16 +14095,19 @@ var app = new Vue({
                 return u.id !== user.id;
             });
         }).listen('MessageSent', function (event) {
-            _this.messages.push({
-                message: event.message.message,
-                user: event.user
-            });
+            // to ramy
+            if (event.message.roomChannel == roomlayout) {
+                _this.messages.push({
+                    message: event.message.message,
+                    user: event.user
+                });
 
-            _this.users.forEach(function (user, index) {
-                if (user.id === event.user.id) {
-                    _this.$set(_this.users, index, user);
-                }
-            });
+                _this.users.forEach(function (user, index) {
+                    if (user.id === event.user.id) {
+                        _this.$set(_this.users, index, user);
+                    }
+                });
+            }
         });
         // .listenForWhisper("typing",response =>{
         //     console.log("aykalam");
@@ -14118,7 +14121,10 @@ var app = new Vue({
             var _this2 = this;
 
             axios.get('/messages').then(function (response) {
-                _this2.messages = response.data;
+                // to ramy
+                _this2.messages = response.data.filter(function (m) {
+                    return m.roomChannel == roomlayout;
+                });
             });
         },
         addMessage: function addMessage(message) {
@@ -59145,9 +59151,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: this.newMessage,
                 room: this.room
             });
-            console.log(this.user);
-            console.log(this.room);
-            console.log(this);
 
             this.newMessage = '';
         }

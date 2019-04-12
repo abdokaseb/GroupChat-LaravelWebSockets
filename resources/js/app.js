@@ -36,7 +36,7 @@ const app = new Vue({
     created() {
         this.fetchMessages();
 
-        Echo.join(roomlayout)
+        Echo.join('chat')
             .here(users => {
                 this.users = users;
             })
@@ -47,16 +47,19 @@ const app = new Vue({
                 this.users = this.users.filter(u => u.id !== user.id);
             })
             .listen('MessageSent', (event) => {
-                this.messages.push({
-                    message: event.message.message,
-                    user: event.user
-                });
+                // to ramy
+                if (event.message.roomChannel == roomlayout){
+                    this.messages.push({
+                        message: event.message.message,
+                        user: event.user
+                    });
 
-                this.users.forEach((user, index) => {
-                    if (user.id === event.user.id) {
-                        this.$set(this.users, index, user);
-                    }
-                });
+                    this.users.forEach((user, index) => {
+                        if (user.id === event.user.id) {
+                            this.$set(this.users, index, user);
+                        }
+                    });
+                }
             });
             // .listenForWhisper("typing",response =>{
             //     console.log("aykalam");
@@ -67,7 +70,8 @@ const app = new Vue({
     methods: {
         fetchMessages() {
             axios.get('/messages').then(response => {
-                this.messages = response.data;
+                // to ramy
+                this.messages = response.data.filter(m => m.roomChannel == roomlayout)
             });
         },
 
