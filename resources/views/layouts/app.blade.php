@@ -9,9 +9,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    @if (isset($room))
-    <script>var roomlayout = "{{$room}}";</script>
+
+    @if (isset($roomto))
+        <script>var roomlayout = "{{$roomto}}";
+        </script>
     @endif
     <script src="{{ asset('js/app.js') }}" defer></script>
 

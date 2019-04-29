@@ -12,9 +12,10 @@
                     @keyup.enter="sendMessage">
 
             <span class="input-group-btn">
-                <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
+                <button class="btn btn-dark col-12 mt-3" id="btn-chat" @click="sendMessage">
                     Send
                 </button>
+
             </span>
         </div>
             <span class="text-muted" v-if="userTyping">someone is typing...</span>
@@ -34,7 +35,7 @@
     created() {
          Echo.join('chat')
              .listenForWhisper("typing",typingData =>{
-                 if (typingData.room == roomlayout){
+                 if (typingData.room == this.room){
                      this.userTyping = true;
                      if(this.timer){clearTimeout(this.timer)};
                      this.timer = setTimeout(() => {

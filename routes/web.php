@@ -15,6 +15,10 @@ Auth::routes();
 
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
-Route::get('new/{room?}','ChatsController@newRoom');
 
-Route::get('/{room?}', 'ChatsController@index');
+Route::post('/newroom','ChatsController@createRoom');
+Route::get('/rooms/{name}','ChatsController@show');
+
+Route::get('/', function(){
+    return redirect('/rooms/general');
+});

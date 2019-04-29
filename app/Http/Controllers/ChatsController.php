@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
 use App\Message;
+use App\Room;
 use Illuminate\Http\Request;
 
 class ChatsController extends Controller
@@ -12,25 +13,39 @@ class ChatsController extends Controller
     {
         $this->middleware('auth');
     }
-
-    public function newRoom(Request $request){
-        $room = $request->room;
-        echo $room;
-        Broadcast::channel($room, function ($user) {
-            return $user;
-        });
-
-        return ['status' => 'Message Sent!'];
-    }
-
-    public function index(Request $request)
+    public function createRoom(Request $data)
     {
-        $room = $request->room;
-        if ($room == NULL){
-            $room = 'general';
-        }
-        return view('chat')->with(['room'=>$room]);
+       $room= new Room();
+       $room->room_name=$data->get('room_name');
+       if(Room::where('room_name',$data->get('room_name'))->first()== null) {
+           $room->save();
+       }
+       else{
+           $room= Room::where('room_name',$data->get('room_name'))->first();
+       }
+       return redirect("/rooms/".$room->room_name);
     }
+
+    public function show($name){
+
+        $room=Room::where('room_name',$name)->first();
+        if($name=='general'){
+            return view('chat')->with(['room'=>'general']);
+        }
+        if($room==null){
+           return redirect("/notfound");
+       }
+
+        return view('chat')->with(['room'=>$room->room_name,'roomto'=>$name]);
+    }
+//    public function index(Request $request)
+//    {
+//        $room = $request->room;
+//        if ($room == NULL){
+//            $room = 'general';
+//        }
+//        return view('chat')->with(['room'=>$room]);
+//    }
 
     public function fetchMessages()
     {

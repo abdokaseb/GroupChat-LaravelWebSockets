@@ -34,6 +34,7 @@ const app = new Vue({
     data: {
         messages: [],
         users: [],
+        message:'',
     },
 
     created() {
