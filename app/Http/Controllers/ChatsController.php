@@ -30,7 +30,11 @@ class ChatsController extends Controller
 
         $room=Room::where('room_name',$name)->first();
         if($name=='general'){
-            return view('chat')->with(['room'=>'general']);
+            $room= new Room();
+            $room->room_name='general';
+            if(Room::where('room_name','general')->first()== null) {
+                $room->save();
+            }
         }
         if($room==null){
            return redirect("/notfound");
@@ -38,14 +42,6 @@ class ChatsController extends Controller
 
         return view('chat')->with(['room'=>$room->room_name,'roomto'=>$name]);
     }
-//    public function index(Request $request)
-//    {
-//        $room = $request->room;
-//        if ($room == NULL){
-//            $room = 'general';
-//        }
-//        return view('chat')->with(['room'=>$room]);
-//    }
 
     public function fetchMessages()
     {

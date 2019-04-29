@@ -80,10 +80,12 @@ const app = new Vue({
         },
 
         addMessage(message) {
-            this.messages.push(message);
-            axios.post('/messages', message).then(response => {
-                console.log(response.data);
-            });
+            if (message.message != ""){
+                this.messages.push(message);
+                axios.post('/messages', message).then(response => {
+                    console.log(response.data);
+                });
+            }
         }
     }
 });
